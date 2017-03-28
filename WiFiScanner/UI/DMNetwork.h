@@ -12,17 +12,18 @@
 #define kDMVendorBaseURL @"http://www.macvendorlookup.com/api/"
 #define kDMVendorAPIKey  @"CBZBXAV"
 
-typedef void (^DMNetworkGetVendorCompletion)(NSString *retVal, NSError *error);
+typedef void (^DMNetworkGetVendorCompletion)(NSString* retVal, NSError* error);
 
-@interface DMNetwork : NSObject {
+@interface DMNetwork : NSObject
+{
 	WiFiNetworkRef _network;
-	NSString       *_SSID;
-	NSString       *_encryptionModel;
-	NSString       *_BSSID;
-	NSString       *_username;
-	NSString       *_password;
-	NSString       *_vendor;
-	NSDictionary   *_record;
+	NSString*      _SSID;
+	NSString*      _encryptionModel;
+	NSString*      _BSSID;
+	NSString*      _username;
+	NSString*      _password;
+	NSString*      _vendor;
+	NSDictionary*  _record;
 	float          _RSSI;
 	int            _channel;
 	int            _APMode;
@@ -36,13 +37,13 @@ typedef void (^DMNetworkGetVendorCompletion)(NSString *retVal, NSError *error);
 	BOOL           _requiresPassword;
 }
 
-@property(nonatomic, copy) NSString *SSID;
-@property(nonatomic, copy) NSString *encryptionModel;
-@property(nonatomic, copy) NSString *BSSID;
-@property(nonatomic, copy) NSString *password;
-@property(nonatomic, copy) NSString *username;
-@property(nonatomic, copy) NSString *vendor;
-@property(nonatomic, copy) NSDictionary *record;
+@property(nonatomic, copy) NSString* SSID;
+@property(nonatomic, copy) NSString* encryptionModel;
+@property(nonatomic, copy) NSString* BSSID;
+@property(nonatomic, copy) NSString* password;
+@property(nonatomic, copy) NSString* username;
+@property(nonatomic, copy) NSString* vendor;
+@property(nonatomic, copy) NSDictionary* record;
 @property(nonatomic, assign) float RSSI;
 @property(nonatomic, assign) int channel;
 @property(nonatomic, assign) int APMode;

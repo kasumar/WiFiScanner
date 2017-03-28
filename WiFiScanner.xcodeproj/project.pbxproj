@@ -25,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10B3ED031E7BC01F00283EF4 /* MobileWiFi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileWiFi.h; sourceTree = "<group>"; };
+		10B3ED041E7BC01F00283EF4 /* WiFiDeviceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiDeviceClient.h; sourceTree = "<group>"; };
+		10B3ED051E7BC01F00283EF4 /* WiFiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiManager.h; sourceTree = "<group>"; };
+		10B3ED061E7BC01F00283EF4 /* WiFiNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiNetwork.h; sourceTree = "<group>"; };
 		10D0D9A51E79335B006D0BBF /* WiFiScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WiFiScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10D0D9A81E79335B006D0BBF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		10D0D9AA1E79335B006D0BBF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -71,6 +75,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10B3ED021E7BC01F00283EF4 /* MobileWiFi */ = {
+			isa = PBXGroup;
+			children = (
+				10B3ED031E7BC01F00283EF4 /* MobileWiFi.h */,
+				10B3ED041E7BC01F00283EF4 /* WiFiDeviceClient.h */,
+				10B3ED051E7BC01F00283EF4 /* WiFiManager.h */,
+				10B3ED061E7BC01F00283EF4 /* WiFiNetwork.h */,
+			);
+			name = MobileWiFi;
+			path = "ios-reversed-headers/MobileWiFi";
+			sourceTree = SOURCE_ROOT;
+		};
 		10D0D99C1E79335B006D0BBF = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +118,7 @@
 		10D0D9AE1E79335B006D0BBF /* WiFiScanner */ = {
 			isa = PBXGroup;
 			children = (
+				10B3ED021E7BC01F00283EF4 /* MobileWiFi */,
 				10D0D9F21E79347A006D0BBF /* UI */,
 				10D0D9B71E79335B006D0BBF /* AppDelegate.h */,
 				10D0D9B81E79335B006D0BBF /* AppDelegate.m */,

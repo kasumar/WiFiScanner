@@ -22,24 +22,25 @@
 @end
 
 @interface UIImage ()
-- (UIImage *)imageNamed:(NSString *)named inBundle:(NSBundle *)bundle;
+- (UIImage*)imageNamed:(NSString*)named inBundle:(NSBundle*)bundle;
 @end
 
-UIKIT_EXTERN UIImage *_UIImageWithName(NSString *name);
+UIKIT_EXTERN UIImage* _UIImageWithName(NSString* name);
 
 @interface UIColor (Private)
-+ (UIColor *)tableCellValue1BlueColor;
++ (UIColor*)tableCellValue1BlueColor;
 @end
 
-@interface DMNetworksViewController : UITableViewController <UIAlertViewDelegate> {
-	UIProgressHUD           *_hud;
-	UIBarButtonItem         *_scanButton;
-	UISwitch                *_enabledSwitchView;
-	UIActivityIndicatorView *_spinner;
-	NSBundle                *_airPortSettingsBundle;
-	NSTimer                 *_autoScanTimer;
-	long                    _numberOfSections;
-	DMNetwork               *_associatingNetwork;
+@interface DMNetworksViewController : UITableViewController <UIAlertViewDelegate>
+{
+	UIProgressHUD*           _hud;
+	UIBarButtonItem*         _scanButton;
+	UISwitch*                _enabledSwitchView;
+	UIActivityIndicatorView* _spinner;
+	NSBundle*                _airPortSettingsBundle;
+	NSTimer*                 _autoScanTimer;
+	long                     _numberOfSections;
+	DMNetwork*               _associatingNetwork;
 }
 
 @end

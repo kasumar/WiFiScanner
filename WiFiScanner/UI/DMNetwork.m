@@ -8,7 +8,7 @@
 
 #import "DMNetwork.h"
 
-static void DMNetworkGetVendorFromMacAddress(NSString *macAddress, DMNetworkGetVendorCompletion completion);
+static void DMNetworkGetVendorFromMacAddress(NSString* macAddress, DMNetworkGetVendorCompletion completion);
 
 @implementation DMNetwork
 @synthesize SSID             = _SSID;
@@ -35,7 +35,8 @@ static void DMNetworkGetVendorFromMacAddress(NSString *macAddress, DMNetworkGetV
 {
 	self = [super init];
 
-	if (self) {
+	if (self)
+    {
 		_network = (WiFiNetworkRef)CFRetain(network);
 	}
 
@@ -57,7 +58,7 @@ static void DMNetworkGetVendorFromMacAddress(NSString *macAddress, DMNetworkGetV
 }
 
 
-- (NSString *)description
+- (NSString*)description
 {
 	return [NSString stringWithFormat:@"%@ SSID: %@ RSSI: %f Encryption Model: %@ Channel: %i AppleHotspot: %i CurrentNetwork: %i BSSID: %@ AdHoc: %i Hidden: %i Associating: %i", [super description], [self SSID], [self RSSI], [self encryptionModel], [self channel], [self isAppleHotspot], [self isCurrentNetwork], [self BSSID], [self isAdHoc], [self isHidden], [self isAssociating]];
 }
@@ -66,7 +67,7 @@ static void DMNetworkGetVendorFromMacAddress(NSString *macAddress, DMNetworkGetV
 - (void)populateData
 {
 	// SSID
-	NSString *SSID = (NSString *)WiFiNetworkGetSSID(_network);
+	NSString* SSID = (NSString*)WiFiNetworkGetSSID(_network);
 	[self setSSID:SSID];
 
 	// RSSI & bars.
@@ -87,11 +88,17 @@ static void DMNetworkGetVendorFromMacAddress(NSString *macAddress, DMNetworkGetV
 
 	// Encryption model
 	if (WiFiNetworkIsWEP(_network))
+    {
 		[self setEncryptionModel:@"WEP"];
+    }
 	else if (WiFiNetworkIsWPA(_network))
+    {
 		[self setEncryptionModel:@"WPA"];
+    }
 	else
+    {
 		[self setEncryptionModel:@"None"];
+    }
 
 	// Channel
 	CFNumberRef networkChannel = (CFNumberRef)WiFiNetworkGetProperty(_network, CFSTR("CHANNEL"));
@@ -105,7 +112,7 @@ static void DMNetworkGetVendorFromMacAddress(NSString *macAddress, DMNetworkGetV
 	[self setIsAppleHotspot:isAppleHotspot];
 
 	// BSSID
-	NSString *BSSID = (NSString *)WiFiNetworkGetProperty(_network, CFSTR("BSSID"));
+	NSString* BSSID = (NSString*)WiFiNetworkGetProperty(_network, CFSTR("BSSID"));
 	[self setBSSID:BSSID];
 
 	// AdHoc
@@ -117,11 +124,11 @@ static void DMNetworkGetVendorFromMacAddress(NSString *macAddress, DMNetworkGetV
 	[self setIsHidden:isHidden];
 
 	// AP Mode
-	int APMode = [(NSNumber *)WiFiNetworkGetProperty(_network, CFSTR("AP_MODE")) intValue];
+	int APMode = [(NSNumber*)WiFiNetworkGetProperty(_network, CFSTR("AP_MODE")) intValue];
 	[self setAPMode:APMode];
 
 	// Record
-	NSDictionary *record = (NSDictionary *)WiFiNetworkCopyRecord(_network);
+	NSDictionary* record = (NSDictionary*)WiFiNetworkCopyRecord(_network);
 	[self setRecord:record];
 	[record release];
 
@@ -134,11 +141,15 @@ static void DMNetworkGetVendorFromMacAddress(NSString *macAddress, DMNetworkGetV
 	[self setRequiresPassword:requiresPassword];
 
 	// Vendor
-	DMNetworkGetVendorFromMacAddress(BSSID, ^(NSString *retVal, NSError *error) {
-		if (error) {
+	DMNetworkGetVendorFromMacAddress(BSSID, ^(NSString* retVal, NSError* error)
+    {
+		if (error)
+        {
 			NSLog(@"[DMNetwork]:[%s]: Error while getting vendor: %@", __FUNCTION__, [error localizedDescription]);
 			[self setVendor:@"Unknown"];
-		} else {
+		}
+        else
+        {
 			[self setVendor:retVal];
 		}
 	});
@@ -146,35 +157,42 @@ static void DMNetworkGetVendorFromMacAddress(NSString *macAddress, DMNetworkGetV
 
 @end
 
-static void DMNetworkGetVendorFromMacAddress(NSString *macAddress, DMNetworkGetVendorCompletion completion)
-{
-	NSString *address = [NSString stringWithFormat:@"%@/%@/%@", kDMVendorBaseURL, kDMVendorAPIKey, macAddress];
 
-	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:address]];
-	[NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-		if (error) {
+static void DMNetworkGetVendorFromMacAddress(NSString* macAddress, DMNetworkGetVendorCompletion completion)
+{
+	NSString* address = [NSString stringWithFormat:@"%@/%@/%@", kDMVendorBaseURL, kDMVendorAPIKey, macAddress];
+
+	NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:address]];
+	[NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse* response, NSData* data, NSError* error)
+    {
+		if (error)
+        {
 			completion(nil, error);
 			return;
 		}
 
-		NSString *result = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+		NSString* result = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 
-		if ([result isEqualToString:@"none"]) {
-			NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+		if ([result isEqualToString:@"none"])
+        {
+			NSMutableDictionary* errorDetail = [NSMutableDictionary dictionary];
 			[errorDetail setValue:@"Couldn't get vendor because the API returned \"none\"." forKey:NSLocalizedDescriptionKey];
 
-			NSError *anError = [NSError errorWithDomain:@"DMNetworkErrorDomain" code:100 userInfo:errorDetail];
+			NSError* anError = [NSError errorWithDomain:@"DMNetworkErrorDomain" code:100 userInfo:errorDetail];
 			completion(nil, anError);
 			return;
-		} else {
+		}
+        else
+        {
 			NSRange firstRange = [result rangeOfString:@"<company>"];
 			NSRange secondRange = [result rangeOfString:@"</company>"];
 
-			if (firstRange.location != NSNotFound) {
+			if (firstRange.location != NSNotFound)
+            {
 				NSUInteger index = firstRange.location + firstRange.length;
 				NSRange finalRange = NSMakeRange(index, secondRange.location - index);
 
-				NSString *retVal = [result substringWithRange:finalRange];
+				NSString* retVal = [result substringWithRange:finalRange];
 				completion(retVal, nil);
 			}
 		}
