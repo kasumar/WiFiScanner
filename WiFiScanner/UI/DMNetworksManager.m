@@ -104,6 +104,11 @@ static DMNetworksManager* _sharedInstance = nil;
 	[self _scan];
 }
 
+- (void)clearNetworks
+{
+    [self _clearNetworks];
+}
+
 - (void)associateWithNetwork:(DMNetwork*)network
 {
 	// Prevent initiating an association if we're already associating.
@@ -281,6 +286,13 @@ static DMNetworksManager* _sharedInstance = nil;
 	}
     else
     {
+        //写入已知列表配置 Add By KAGE
+        if (_client)
+        {
+            WiFiNetworkRef network = WiFiDeviceClientCopyCurrentNetwork(_client);
+            WiFiManagerClientAddNetwork(_manager, network);
+        }
+
 		// Post a notification to tell the controller that association has finished.
 		[[NSNotificationCenter defaultCenter] postNotificationName:kDMNetworksManagerDidFinishAssociating object:nil];
 	}

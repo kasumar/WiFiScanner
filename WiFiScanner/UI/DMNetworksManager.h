@@ -28,6 +28,7 @@
 
 + (id)sharedInstance;
 - (void)scan;
+- (void)clearNetworks;
 - (void)removeNetwork:(WiFiNetworkRef)network;
 - (void)associateWithNetwork:(DMNetwork*)network;
 - (void)disassociate;

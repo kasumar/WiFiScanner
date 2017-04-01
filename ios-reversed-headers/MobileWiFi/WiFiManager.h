@@ -27,6 +27,7 @@ extern "C" {
 	CFArrayRef WiFiManagerClientCopyDevices(WiFiManagerRef manager);
 	CFArrayRef WiFiManagerClientCopyNetworks(WiFiManagerRef manager);
 
+    void WiFiManagerClientAddNetwork(WiFiManagerRef manager, WiFiNetworkRef network); //Add By KAGE
 	void WiFiManagerClientRemoveNetwork(WiFiManagerRef manager, WiFiNetworkRef network);
 
 	WiFiDeviceClientRef WiFiManagerClientGetDevice(WiFiManagerRef manager);
