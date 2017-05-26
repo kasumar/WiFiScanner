@@ -12,13 +12,13 @@
 
 ---------------------------------------------------------------------------------------
 安装方法1:<br>
-&ensp;&ensp; 1、拷贝到iPhone设备的"/Applications"目录下<br>
+&ensp;&ensp; 1、将编译出来的App拷贝到iPhone设备的"/Applications"目录下<br>
 &ensp;&ensp; 2、变更为root组，chown -R root:wheel /Applications/WiFiScanner.app<br>
 &ensp;&ensp; 3、赋予可执行权限，chmod -R 755 /Applications/WiFiScanner.app<br>
 &ensp;&ensp; 4、刷新桌面图标，su -c /usr/bin/uicache mobile<br>
 
 安装方法2（本人未进行测试，只是觉得或许可行）:<br>
-&ensp;&ensp; 选定开发者证书，通过Xcode直接编译到iPhone设备上<br>
+&ensp;&ensp; 选定开发者证书，通过Xcode直接编译并部署到iPhone设备上<br>
 
 ---------------------------------------------------------------------------------------
 ![shot](https://github.com/kasumar/WiFiScanner/raw/master/screenshot/1.jpg)
